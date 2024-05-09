@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merit Calculator</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Merit Calculator</h1>
+        <form action="/result" method="post">
+            <div class="form-group">
+                <label for="mdcet_score">MDCAT Score (out of 200)</label>
+                <input type="number" class="form-control" id="mdcet_score" name="mdcet_score" required>
+            </div>
+            <div class="form-group">
+                <label for="fsc_score">FSC Score (out of 1100)</label>
+                <input type="number" class="form-control" id="fsc_score" name="fsc_score" required>
+            </div>
+            <div class="form-group">
+                <label for="matric_score">Matric Score (out of 1100)</label>
+                <input type="number" class="form-control" id="matric_score" name="matric_score" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Calculate</button>
+        </form>
+        
+        {% if merit %}
+        <div class="mt-5">
+            <h3>Result</h3>
+            <p>MDCAT Score: {{ mdcet_score }}</p>
+            <p>FSC Score: {{ fsc_score }}</p>
+            <p>Matric Score: {{ matric_score }}</p>
+            <p>Your total merit score is: {{ merit }}</p>
+            <p>Among the merit scores of {{ total_students }} students who appeared last year for MDCAT, your score is this much, and your position is {{ position }}.</p>
+            <div>
+                <img src="data:image/png;base64,{{ graph_url }}" alt="Merit Comparison Graph">
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="container mt-5">
+        <h1>Merit Calculator</h1>
+        <form action="/result" method="post">
+            <!-- Input form fields -->
+        </form>
+        
+        {% if merit %}
+        <div class="mt-5">
+            <!-- Display result -->
+        </div>
+        
+        <div class="mt-5">
+            <!-- Display interactive histogram -->
+            <h3>Merit Score Comparison</h3>
+            {{ graph_html_hist | safe }}
+        </div>
+
+        <div class="mt-5">
+            <!-- Display interactive scatter plot -->
+            <h3>Merit vs. Position</h3>
+            {{ graph_html_scatter | safe }}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
