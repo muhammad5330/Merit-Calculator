@@ -19,6 +19,9 @@ img{
     <nav class="d-flex justify-content-center align-items-start">
         <img src="/static/logo.svg" alt="Logo" class="img-fluid">
     </nav>
+
+
+    <!-- THE CALCULATOR INPUT SECTION -->
     <div class="container mt-5">
         <h1>Merit Calculator</h1>
         <form action="/result" method="post">
@@ -37,6 +40,7 @@ img{
             <button type="submit" class="btn btn-primary">Calculate</button>
         </form>
         
+        <!-- THE MERIT RESULT SECTION -->
         {% if merit %}
         <div class="mt-5">
             <h3>Result</h3>
