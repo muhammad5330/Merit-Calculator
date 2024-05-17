@@ -9,17 +9,21 @@
     <title>Educatify</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-
-        body{
+        body {
             background: #000;
             color: white;
             font-family: 'Poppins', sans-serif;
         }
 
-        .bodybg{
-            background: url('/static/hero-bg.svg')  center center;
+        .header button {
+            background: #000;
+        }
+
+        .bodybg {
+            background: url('/static/hero-bg.svg') center center;
 
         }
+
         /* Ensure the header takes up the full viewport height */
         .header {
             position: relative;
@@ -35,8 +39,36 @@
         img {
             width: 10%;
         }
-        .header h1{
+
+        .header h1 {
             font-weight: bold;
+        }
+
+        .neumorphic-button {
+            background-color: #000;
+            /* Black background color */
+            color: #fff;
+            /* White text color */
+            padding: 10px 20px;
+            /* Adjust padding as needed */
+            border: none;
+            /* Remove default border */
+            border-radius: 8px;
+            /* Add border radius for rounded corners */
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3),
+                /* Add box shadow for neumorphic effect */
+                0px 0px 16px rgba(0, 0, 0, 0.1);
+            /* Add another layer of shadow for depth */
+
+            /* Transition for smoother hover effect */
+            transition: box-shadow 0.3s ease-in-out;
+        }
+
+        .neumorphic-button:hover {
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.5),
+                /* Adjust shadow on hover */
+                0px 0px 24px rgba(0, 0, 0, 0.2);
+            /* Adjust shadow on hover */
         }
     </style>
 </head>
@@ -45,122 +77,125 @@
 
     <section class="bodybg">
 
-    <!-- THE HERO SECTION -->
+        <!-- THE HERO SECTION -->
 
-    <header class="header text-center text-white">
-        <nav class="d-flex justify-content-center align-items-start">
-            <img src="/static/white-logo.svg" alt="Logo" class="img-fluid">
-        </nav>
-        <div class="container d-flex flex-column align-items-center justify-content-center h-100">
-            <h1 class="display-4 text-left text-md-center ml-md-0 ml-3">Introducing our AI-MDCAT/ETEA Merit Calculator</h1>
-            <div class="mt-4">
-               <a href="#calculator"> <button class="btn btn-primary mr-2">Calculate Merit</button></a>
-               <a href="#conselling"> <button class="btn btn-primary">Career Counselling</button></a>
+        <header class="header text-center text-white">
+            <nav class="d-flex justify-content-center align-items-start">
+                <img src="/static/white-logo.svg" alt="Logo" class="img-fluid">
+            </nav>
+            <div class="container d-flex flex-column align-items-center justify-content-center h-100">
+                <h1 class="display-4 text-left text-md-center ml-md-0 ml-3">Introducing our AI-MDCAT/ETEA Merit
+                    Calculator</h1>
+                <p id="tagline" class="lead"></p>
+                <div class="mt-4">
+                    <a href="#calculator"> <button class="btn btn-primary mr-2 neumorphic-button">Calculate Merit</button></a>
+                    <a href="#conselling"> <button class="btn btn-primary">Career Counselling</button></a>
+                </div>
             </div>
-        </div>
-    </header>
+        </header>
 
-    <!-- THE CALCULATOR INPUT SECTION -->
-    <div id="calculator" class="container mt-5">
-        <h1>Merit Calculator</h1>
-        <form action="/result" method="post">
-            <div class="form-group">
-                <label for="mdcet_score">MDCAT Score (out of 200)</label>
-                <input type="number" class="form-control" id="mdcet_score" name="mdcet_score" required>
+        <!-- THE CALCULATOR INPUT SECTION -->
+        <div id="calculator" class="container mt-5">
+            <h1>Merit Calculator</h1>
+            <form action="/result" method="post">
+                <div class="form-group">
+                    <label for="mdcet_score">MDCAT Score (out of 200)</label>
+                    <input type="number" class="form-control" id="mdcet_score" name="mdcet_score" required>
+                </div>
+                <div class="form-group">
+                    <label for="fsc_score">FSC Score (out of 1100)</label>
+                    <input type="number" class="form-control" id="fsc_score" name="fsc_score" required>
+                </div>
+                <div class="form-group">
+                    <label for="matric_score">Matric Score (out of 1100)</label>
+                    <input type="number" class="form-control" id="matric_score" name="matric_score" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Calculate</button>
+            </form>
+
+            <!-- THE MERIT RESULT SECTION -->
+            {% if merit %}
+            <div class="mt-5">
+                <h3>Result</h3>
+                <p>MDCAT Score: {{ mdcet_score }}</p>
+                <p>FSC Score: {{ fsc_score }}</p>
+                <p>Matric Score: {{ matric_score }}</p>
+                <p>Your total merit score is: {{ merit }}</p>
+                <p>Among the merit scores of {{ total_students }} students who appeared last year for MDCAT, your score
+                    is
+                    this much, and your position is {{ position }}.</p>
             </div>
-            <div class="form-group">
-                <label for="fsc_score">FSC Score (out of 1100)</label>
-                <input type="number" class="form-control" id="fsc_score" name="fsc_score" required>
+            {% endif %}
+        </div>
+
+        <div class="container mt-5">
+            <form action="/result" method="post">
+                <!-- Input form fields -->
+            </form>
+
+            {% if merit %}
+            <div class="mt-5">
+                <!-- Display result -->
             </div>
-            <div class="form-group">
-                <label for="matric_score">Matric Score (out of 1100)</label>
-                <input type="number" class="form-control" id="matric_score" name="matric_score" required>
+
+            <div class="mt-5">
+                <!-- Display interactive histogram -->
+                <h3>Merit Score Comparison</h3>
+                {{ graph_html_hist | safe }}
             </div>
-            <button type="submit" class="btn btn-primary">Calculate</button>
-        </form>
 
-        <!-- THE MERIT RESULT SECTION -->
-        {% if merit %}
-        <div class="mt-5">
-            <h3>Result</h3>
-            <p>MDCAT Score: {{ mdcet_score }}</p>
-            <p>FSC Score: {{ fsc_score }}</p>
-            <p>Matric Score: {{ matric_score }}</p>
-            <p>Your total merit score is: {{ merit }}</p>
-            <p>Among the merit scores of {{ total_students }} students who appeared last year for MDCAT, your score is
-                this much, and your position is {{ position }}.</p>
-        </div>
-        {% endif %}
-    </div>
-
-    <div class="container mt-5">
-        <form action="/result" method="post">
-            <!-- Input form fields -->
-        </form>
-
-        {% if merit %}
-        <div class="mt-5">
-            <!-- Display result -->
+            <div class="mt-5">
+                <!-- Display interactive scatter plot -->
+                <h3>Merit vs. Position</h3>
+                {{ graph_html_scatter | safe }}
+            </div>
+            {% endif %}
         </div>
 
-        <div class="mt-5">
-            <!-- Display interactive histogram -->
-            <h3>Merit Score Comparison</h3>
-            {{ graph_html_hist | safe }}
-        </div>
-
-        <div class="mt-5">
-            <!-- Display interactive scatter plot -->
-            <h3>Merit vs. Position</h3>
-            {{ graph_html_scatter | safe }}
-        </div>
-        {% endif %}
-    </div>
-
-<!-- CAREER COUNSELLING SECTION -->
+        <!-- CAREER COUNSELLING SECTION -->
 
 
 
 
-      <!-- Footer -->
-  <section class="footer-section">
-    <div class="footer-div">
-      <a href="#" class="fa fa-twitter"></a>
-      <a href="#" class="fa fa-google"></a>
-      <a href="#" class="fa fa-linkedin"></a>
-      <a href="#" class="fa fa-instagram"></a>
-      <p>Copyright &copy;2024. All rights Reserved.</p>
-      <p> Designed by </p><img src="/static/white-logo.svg" />
-    </div>
-  </section>
+        <!-- Footer -->
+        <section class="footer-section">
+            <div class="footer-div">
+                <a href="#" class="fa fa-twitter"></a>
+                <a href="#" class="fa fa-google"></a>
+                <a href="#" class="fa fa-linkedin"></a>
+                <a href="#" class="fa fa-instagram"></a>
+                <p>Copyright &copy;2024. All rights Reserved.</p>
+                <p> Designed by </p><img src="/static/white-logo.svg" />
+            </div>
+        </section>
 
 
-    <script>
-        // Array of words to cycle through
-        const words = [
-            "incredible things",
-            "amazing experiences",
-            "unforgettable moments"
-        ];
+        <script>
+            // Array of words to cycle through
+            const words = [
+                "incredible things",
+                "amazing experiences",
+                "unforgettable moments"
+            ];
 
-        let wordIndex = 0;
-        const taglineElement = document.getElementById('tagline');
+            let wordIndex = 0;
+            const taglineElement = document.getElementById('tagline');
 
-        function updateTagline() {
-            const baseText = "Your tagline with changing words";
-            taglineElement.textContent = `${baseText} ${words[wordIndex]}`;
-            wordIndex = (wordIndex + 1) % words.length;
-        }
+            function updateTagline() {
+                const baseText = "";
+                taglineElement.textContent = `${baseText} ${words[wordIndex]}`;
+                wordIndex = (wordIndex + 1) % words.length;
+            }
 
-        // Change words every 3 seconds
-        setInterval(updateTagline, 3000);
+            // Change words every 3 seconds
+            setInterval(updateTagline, 3000);
 
-        // Initial call to set the first tagline
-        updateTagline();
+            // Initial call to set the first tagline
+            updateTagline();
 
 
 
-    </script>
+        </script>
 
     </section>
 </body>
