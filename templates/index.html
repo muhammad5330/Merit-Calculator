@@ -44,32 +44,6 @@
             font-weight: bold;
         }
 
-        .neumorphic-button {
-            background-color: #000;
-            /* Black background color */
-            color: #fff;
-            /* White text color */
-            padding: 10px 20px;
-            /* Adjust padding as needed */
-            border: none;
-            /* Remove default border */
-            border-radius: 8px;
-            /* Add border radius for rounded corners */
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3),
-                /* Add box shadow for neumorphic effect */
-                0px 0px 16px rgba(0, 0, 0, 0.1);
-            /* Add another layer of shadow for depth */
-
-            /* Transition for smoother hover effect */
-            transition: box-shadow 0.3s ease-in-out;
-        }
-
-        .neumorphic-button:hover {
-            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.5),
-                /* Adjust shadow on hover */
-                0px 0px 24px rgba(0, 0, 0, 0.2);
-            /* Adjust shadow on hover */
-        }
     </style>
 </head>
 
@@ -88,7 +62,7 @@
                     Calculator</h1>
                 <p id="tagline" class="lead"></p>
                 <div class="mt-4">
-                    <a href="#calculator"> <button class="btn btn-primary mr-2 neumorphic-button">Calculate Merit</button></a>
+                    <a href="#calculator"> <button class="btn btn-primary mr-2">Calculate Merit</button></a>
                     <a href="#conselling"> <button class="btn btn-primary">Career Counselling</button></a>
                 </div>
             </div>
@@ -169,9 +143,11 @@
         <script>
             // Array of words to cycle through
             const words = [
-                "incredible things",
-                "amazing experiences",
-                "unforgettable moments"
+                "Dream, Calculate, Achieve",
+                "Navigate Success Together",
+                "Future in Focus",
+                "Elevate Your Potential",
+                "Propel Academic Excellence"
             ];
 
             let wordIndex = 0;
@@ -183,8 +159,8 @@
                 wordIndex = (wordIndex + 1) % words.length;
             }
 
-            // Change words every 3 seconds
-            setInterval(updateTagline, 3000);
+            // Change words every 2 seconds
+            setInterval(updateTagline, 2000);
 
             // Initial call to set the first tagline
             updateTagline();
