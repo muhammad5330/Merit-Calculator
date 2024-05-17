@@ -70,19 +70,19 @@
 
         <!-- THE CALCULATOR INPUT SECTION -->
         <div id="calculator" class="container mt-5">
-            <h1>Merit Calculator</h1>
+            <h1 style="font-weight: bold; text-align: center;">Calculate Merit Now!</h1>
             <form action="/result" method="post">
                 <div class="form-group">
-                    <label for="mdcet_score">MDCAT Score (out of 200)</label>
-                    <input type="number" class="form-control" id="mdcet_score" name="mdcet_score" required>
+                    <label for="mdcet_score">Test Score:</label>
+                    <input type="number" class="form-control" id="mdcet_score" name="mdcet_score" placeholder="Enter Estimated Test Score (Out of 200)" required>
                 </div>
                 <div class="form-group">
-                    <label for="fsc_score">FSC Score (out of 1100)</label>
-                    <input type="number" class="form-control" id="fsc_score" name="fsc_score" required>
+                    <label for="fsc_score">FSC Marks:</label>
+                    <input type="number" class="form-control" id="fsc_score" name="fsc_score" placeholder="Enter FSC Marks (Out of 1100)" required>
                 </div>
                 <div class="form-group">
-                    <label for="matric_score">Matric Score (out of 1100)</label>
-                    <input type="number" class="form-control" id="matric_score" name="matric_score" required>
+                    <label for="matric_score">Matric Marks:</label>
+                    <input type="number" class="form-control" id="matric_score" name="matric_score" placeholder="Enter Matric Score (Out of 1100)" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Calculate</button>
             </form>
