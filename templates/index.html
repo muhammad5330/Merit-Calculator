@@ -13,6 +13,7 @@
             background: #000;
             color: white;
             font-family: 'Poppins', sans-serif;
+            margin: 5%;
         }
 
         .header button {
@@ -35,15 +36,26 @@
         .header .container {
             z-index: 2;
         }
-
-        img {
+/* 
+        .logo-image {
             width: 10%;
-        }
+        } */
 
         .header h1 {
             font-weight: bold;
         }
 
+        @media (max-width: 767px) {
+            body{
+                margin: 10%;
+            }
+
+            .logo-image{
+                width: 20%;
+            }
+
+
+        }
     </style>
 </head>
 
@@ -55,7 +67,7 @@
 
         <header class="header text-center text-white">
             <nav class="d-flex justify-content-center align-items-start">
-                <img src="/static/white-logo.svg" alt="Logo" class="img-fluid">
+                <img src="/static/white-logo.svg" alt="Logo" class="logo-image">
             </nav>
             <div class="container d-flex flex-column align-items-center justify-content-center h-100">
                 <h1 class="display-4 text-left text-md-center ml-md-0 ml-3 mx-2">Introducing our AI-MDCAT/ETEA Merit
@@ -74,17 +86,20 @@
             <form action="/result" method="post">
                 <div class="form-group">
                     <label for="mdcet_score">Test Score:</label>
-                    <input type="number" class="form-control" id="mdcet_score" name="mdcet_score" placeholder="Enter Estimated Test Score" required>
+                    <input type="number" class="form-control" id="mdcet_score" name="mdcet_score"
+                        placeholder="Enter Estimated Test Score" required>
                 </div>
                 <div class="form-group">
                     <label for="fsc_score">FSC Marks:</label>
-                    <input type="number" class="form-control" id="fsc_score" name="fsc_score" placeholder="Enter FSC Marks" required>
+                    <input type="number" class="form-control" id="fsc_score" name="fsc_score"
+                        placeholder="Enter FSC Marks" required>
                 </div>
                 <div class="form-group">
                     <label for="matric_score">Matric Marks:</label>
-                    <input type="number" class="form-control" id="matric_score" name="matric_score" placeholder="Enter Matric Score" required>
+                    <input type="number" class="form-control" id="matric_score" name="matric_score"
+                        placeholder="Enter Matric Score" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Calculate</button>
+                <button  type="submit" class=" btn btn-primary">Calculate</button>
             </form>
 
             <!-- THE MERIT RESULT SECTION -->
