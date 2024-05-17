@@ -45,12 +45,6 @@
 
     <section class="bodybg">
 
-    <!-- THE LOGO SECTION  -->
-    <!-- <nav class="d-flex justify-content-center align-items-start">
-        <img src="/static/white-logo.svg" alt="Logo" class="img-fluid">
-    </nav> -->
-
-
     <!-- THE HERO SECTION -->
 
     <header class="header text-center text-white">
@@ -58,17 +52,16 @@
             <img src="/static/white-logo.svg" alt="Logo" class="img-fluid">
         </nav>
         <div class="container d-flex flex-column align-items-center justify-content-center h-100">
-            <h1 class="display-4">Introducing our AI MDCAT/ETEA Merit Calculator</h1>
-            <p id="tagline" class="lead"></p>
+            <h1 class="display-4 text-left text-md-center ml-md-0 ml-3">Introducing our AI-MDCAT/ETEA Merit Calculator</h1>
             <div class="mt-4">
-                <button class="btn btn-primary mr-2">Button 1</button>
-                <button class="btn btn-secondary">Button 2</button>
+               <a href="#calculator"> <button class="btn btn-primary mr-2">Calculate Merit</button></a>
+               <a href="#conselling"> <button class="btn btn-primary">Career Counselling</button></a>
             </div>
         </div>
     </header>
 
     <!-- THE CALCULATOR INPUT SECTION -->
-    <div class="container mt-5">
+    <div id="calculator" class="container mt-5">
         <h1>Merit Calculator</h1>
         <form action="/result" method="post">
             <div class="form-group">
@@ -123,6 +116,10 @@
         </div>
         {% endif %}
     </div>
+
+<!-- CAREER COUNSELLING SECTION -->
+
+
 
 
       <!-- Footer -->
