@@ -166,6 +166,7 @@
                 "Discover Your Destiny"
             ];
 
+            const baseText = "With Educatify ";
             let wordIndex = 0;
             let charIndex = 0;
             const typingSpeed = 100; // Speed in milliseconds
@@ -174,9 +175,8 @@
             const taglineElement = document.getElementById('tagline');
 
             function type() {
-                const baseText = "Your tagline with changing words";
                 if (charIndex < words[wordIndex].length) {
-                    taglineElement.textContent += words[wordIndex].charAt(charIndex);
+                    taglineElement.textContent = baseText + words[wordIndex].substring(0, charIndex + 1);
                     charIndex++;
                     setTimeout(type, typingSpeed);
                 } else {
@@ -186,7 +186,7 @@
 
             function erase() {
                 if (charIndex > 0) {
-                    taglineElement.textContent = words[wordIndex].substring(0, charIndex - 1);
+                    taglineElement.textContent = baseText + words[wordIndex].substring(0, charIndex - 1);
                     charIndex--;
                     setTimeout(erase, erasingSpeed);
                 } else {
@@ -199,8 +199,6 @@
             document.addEventListener('DOMContentLoaded', (event) => {
                 setTimeout(type, typingSpeed);
             });
-
-
 
         </script>
 
