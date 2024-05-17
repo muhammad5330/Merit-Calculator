@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,18 +9,57 @@
     <title>Educatify</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-img{
-    width: 10%;
-}
+
+        body{
+            background: #000;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+        }
+        /* Ensure the header takes up the full viewport height */
+        .header {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: url('/static/hero-bg.svg') no-repeat center center;
+            background-size: cover;
+        }
+
+        .header .container {
+            z-index: 2;
+        }
+
+        img {
+            width: 10%;
+        }
+        .header h1{
+            font-weight: bold;
+        }
     </style>
 </head>
+
 <body>
 
     <!-- THE LOGO SECTION  -->
-    <nav class="d-flex justify-content-center align-items-start">
-        <img src="/static/logo.svg" alt="Logo" class="img-fluid">
-    </nav>
+    <!-- <nav class="d-flex justify-content-center align-items-start">
+        <img src="/static/white-logo.svg" alt="Logo" class="img-fluid">
+    </nav> -->
 
+
+    <!-- THE HERO SECTION -->
+
+    <header class="header text-center text-white">
+        <nav class="d-flex justify-content-center align-items-start">
+            <img src="/static/white-logo.svg" alt="Logo" class="img-fluid">
+        </nav>
+        <div class="container d-flex flex-column align-items-center justify-content-center h-100">
+            <h1 class="display-4">Introducing our AI MDCAT/ETEA Merit Calculator</h1>
+            <p id="tagline" class="lead"></p>
+            <div class="mt-4">
+                <button class="btn btn-primary mr-2">Button 1</button>
+                <button class="btn btn-secondary">Button 2</button>
+            </div>
+        </div>
+    </header>
 
     <!-- THE CALCULATOR INPUT SECTION -->
     <div class="container mt-5">
@@ -39,7 +79,7 @@ img{
             </div>
             <button type="submit" class="btn btn-primary">Calculate</button>
         </form>
-        
+
         <!-- THE MERIT RESULT SECTION -->
         {% if merit %}
         <div class="mt-5">
@@ -48,7 +88,8 @@ img{
             <p>FSC Score: {{ fsc_score }}</p>
             <p>Matric Score: {{ matric_score }}</p>
             <p>Your total merit score is: {{ merit }}</p>
-            <p>Among the merit scores of {{ total_students }} students who appeared last year for MDCAT, your score is this much, and your position is {{ position }}.</p>
+            <p>Among the merit scores of {{ total_students }} students who appeared last year for MDCAT, your score is
+                this much, and your position is {{ position }}.</p>
         </div>
         {% endif %}
     </div>
@@ -57,12 +98,12 @@ img{
         <form action="/result" method="post">
             <!-- Input form fields -->
         </form>
-        
+
         {% if merit %}
         <div class="mt-5">
             <!-- Display result -->
         </div>
-        
+
         <div class="mt-5">
             <!-- Display interactive histogram -->
             <h3>Merit Score Comparison</h3>
@@ -76,5 +117,34 @@ img{
         </div>
         {% endif %}
     </div>
+
+
+    <script>
+        // Array of words to cycle through
+        const words = [
+            "incredible things",
+            "amazing experiences",
+            "unforgettable moments"
+        ];
+
+        let wordIndex = 0;
+        const taglineElement = document.getElementById('tagline');
+
+        function updateTagline() {
+            const baseText = "Your tagline with changing words";
+            taglineElement.textContent = `${baseText} ${words[wordIndex]}`;
+            wordIndex = (wordIndex + 1) % words.length;
+        }
+
+        // Change words every 3 seconds
+        setInterval(updateTagline, 3000);
+
+        // Initial call to set the first tagline
+        updateTagline();
+
+
+
+    </script>
 </body>
+
 </html>
