@@ -74,8 +74,8 @@
                     Calculator</h1>
                 <p id="tagline" class="lead"></p>
                 <div class="mt-4">
-                    <a href="#calculator"> <button class="btn btn-primary mx-2 mb-2">Calculate Merit</button></a><br>
-                    <a href="#conselling"> <button class="btn btn-primary mx-2">Career Counselling</button></a>
+                    <a href="#calculator"> <button class="btn btn-primary mx-2 mb-2">Calculate Merit Now</button></a><br>
+                    <a href="#conselling"> <button class="btn btn-primary mx-2">Career Counselling!</button></a>
                 </div>
             </div>
         </header>
@@ -105,7 +105,7 @@
             <!-- THE MERIT RESULT SECTION -->
             {% if merit %}
             <div class="mt-5">
-                <h3>Result</h3>
+                <h3 style="font-weight: bold; text-align: center;">Results</h3>
                 <p>MDCAT Score: {{ mdcet_score }}</p>
                 <p>FSC Score: {{ fsc_score }}</p>
                 <p>Matric Score: {{ matric_score }}</p>
@@ -117,6 +117,7 @@
             {% endif %}
         </div>
 
+        <!-- THE CALCULATOR RESULT SECTION -->
         <div class="container mt-5">
             <form action="/result" method="post">
                 <!-- Input form fields -->
@@ -129,13 +130,13 @@
 
             <div class="mt-5">
                 <!-- Display interactive histogram -->
-                <h3>Merit Score Comparison</h3>
+                <h3 style="text-align: center; font-weight: bold;">Merit Score Comparison</h3>
                 {{ graph_html_hist | safe }}
             </div>
 
             <div class="mt-5">
                 <!-- Display interactive scatter plot -->
-                <h3>Merit vs. Position</h3>
+                <h3 style="text-align: center; font-weight: bold;">Merit vs. Position</h3>
                 {{ graph_html_scatter | safe }}
             </div>
             {% endif %}
