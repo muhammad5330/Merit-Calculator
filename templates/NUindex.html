@@ -287,7 +287,7 @@
                 <p> Designed by </p><img src="/static/white-logo.png" />
             </div>
         </section>
-
+        <p id="aggreg">{{ aggregate }}</p>
     </section>
 
     <script>
@@ -341,7 +341,8 @@
 
 
         var ctx = document.getElementById('aggregateChart').getContext('2d');
-        var aggregate = {{ aggregate| tojson }};
+        var aggregate = parseFloat(document.getElementById('aggreg').innerText);
+        console.log("Aggregate:", aggregate);        
         var programAggregates = {
             'BS Computer Science': 73,
             'BS Software Engineering': 73,
