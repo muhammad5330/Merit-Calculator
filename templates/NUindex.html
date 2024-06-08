@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Aggregate Calculator</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        form {
+            max-width: 450px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="submit"] {
+            width: 95%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            align-items: center;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #023f80;
+        }
+    </style>
+</head>
+<body>
+    <h1>FAST University Aggregate Calculator</h1>
+    <form action="/calculate" method="POST">
+        <label for="matric_percentage">Matric Percentage:</label>
+        <input type="text" id="matric_percentage" name="matric_percentage" placeholder="Enter your matric %"><br><br>
+
+        <label for="fsc_percentage">FSC Percentage:</label><span>(In case if you dont have 12th class results yet, enter estimated result for your FSC, and enter the obtained Percentage.)</span>
+        <input type="text" id="fsc_percentage" name="fsc_percentage" placeholder="Enter your Fsc %"><br><br>
+
+        <label for="nu_test_marks">NU Test Marks:</label>
+        <input type="text" id="nu_test_marks" name="nu_test_marks" placeholder="Enter estimated NU Test Score"><br><br>
+
+        <label for="wrong_mcqs_except_english">Number of Wrong MCQs (Except English):</label>
+        <input type="text" id="wrong_mcqs_except_english" name="wrong_mcqs_except_english"><br><br>
+
+        <label for="wrong_mcqs_english">Number of Wrong MCQs (English):</label>
+        <input type="text" id="wrong_mcqs_english" name="wrong_mcqs_english"><br><br>
+
+        <input type="submit" value="Calculate">
+    </form>
+</body>
+</html>

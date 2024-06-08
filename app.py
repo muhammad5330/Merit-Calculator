@@ -84,5 +84,36 @@ def result():
             return "Error: Unable to calculate the result."
     return "Error: Method not allowed."
 
+
+@app.route('/NUindex')
+def NUindex():
+    return render_template('NUindex.html')
+
+@app.route('/calculate', methods=['POST'])
+def calculate():
+    try:
+        # Get form data
+        matric_percentage = float(request.form['matric_percentage'])
+        fsc_percentage = float(request.form['fsc_percentage'])
+        nu_test_marks = float(request.form['nu_test_marks'])
+        wrong_mcqs_except_english = int(request.form['wrong_mcqs_except_english'])
+        wrong_mcqs_english = int(request.form['wrong_mcqs_english'])
+
+        # Calculate the aggregate
+        aggregate = (matric_percentage * 0.1) + \
+                (fsc_percentage * 0.4) + \
+                ((nu_test_marks - (wrong_mcqs_except_english * 0.25) - (wrong_mcqs_english * 0.25 * 0.33)) * 0.5)
+        
+        
+        # Redirect to the result page with the aggregate value
+        return redirect(url_for('NUresult', aggregate=aggregate))
+    except Exception as e:
+        return str(e)
+
+@app.route('/NUresult')
+def NUresult():
+    aggregate = request.args.get('aggregate')
+    return render_template('NUresult.html', aggregate=aggregate)
+
 if __name__ == '__main__':
     app.run(debug=True)
