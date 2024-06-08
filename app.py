@@ -86,7 +86,7 @@ def result():
 
 
 @app.route('/NUindex')
-def home():
+def NUindex():
     return render_template('NUindex.html', aggregate=None)
 
 @app.route('/calculate', methods=['POST'])
