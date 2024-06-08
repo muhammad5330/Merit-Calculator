@@ -85,6 +85,10 @@ def result():
     return "Error: Method not allowed."
 
 
+
+#####------------<<<NU MERIT CALCULATOR FUNCTIONS>>>---------------#####
+
+
 @app.route('/NUindex')
 def NUindex():
     return render_template('NUindex.html', aggregate=None)
