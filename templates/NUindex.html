@@ -51,19 +51,50 @@
         input[type="submit"]:hover {
             background-color: #023f80;
         }
+
+        .result-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .result-container p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
     </style>
 </head>
 <body>
     <h1>FAST University Aggregate Calculator</h1>
     <form action="/calculate" method="POST">
         <label for="matric_percentage">Matric Percentage:</label>
-        <input type="text" id="matric_percentage" name="matric_percentage" placeholder="Enter your matric %"><br><br>
+        <input type="text" id="matric_percentage" name="matric_percentage"><br><br>
 
-        <label for="fsc_percentage">FSC Percentage:</label><span>(In case if you dont have 12th class results yet, enter estimated result for your FSC, and enter the obtained Percentage.)</span>
-        <input type="text" id="fsc_percentage" name="fsc_percentage" placeholder="Enter your Fsc %"><br><br>
+        <label for="fsc_percentage">FSC Percentage:</label>
+        <input type="text" id="fsc_percentage" name="fsc_percentage"><br><br>
 
         <label for="nu_test_marks">NU Test Marks:</label>
-        <input type="text" id="nu_test_marks" name="nu_test_marks" placeholder="Enter estimated NU Test Score"><br><br>
+        <input type="text" id="nu_test_marks" name="nu_test_marks"><br><br>
 
         <label for="wrong_mcqs_except_english">Number of Wrong MCQs (Except English):</label>
         <input type="text" id="wrong_mcqs_except_english" name="wrong_mcqs_except_english"><br><br>
@@ -73,5 +104,61 @@
 
         <input type="submit" value="Calculate">
     </form>
+
+    {% if aggregate is not none %}
+    <div class="result-container">
+        <p>Your aggregate is: {{ aggregate }}</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Programs</th>
+                    <th>Last Year Merit</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>BS Computer Science</td>
+                    <td>73</td>
+                </tr>
+                <tr>
+                    <td>BS Software Engineering</td>
+                    <td>73</td>
+                </tr>
+                <tr>
+                    <td>BS Artificial Intelligence</td>
+                    <td>72</td>
+                </tr>
+                <tr>
+                    <td>BS Electrical Engineering</td>
+                    <td>72</td>
+                </tr>
+                <tr>
+                    <td>BS Cyber Security</td>
+                    <td>68</td>
+                </tr>
+                <tr>
+                    <td>BS Data Science</td>
+                    <td>68</td>
+                </tr>
+                <tr>
+                    <td>BS Financial Technology</td>
+                    <td>61</td>
+                </tr>
+                <tr>
+                    <td>BS Business Administration</td>
+                    <td>59</td>
+                </tr>
+                <tr>
+                    <td>BS Accounting and Finance</td>
+                    <td>58</td>
+                </tr>
+                <tr>
+                    <td>BS Business Analytics</td>
+                    <td>56</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
 </body>
 </html>

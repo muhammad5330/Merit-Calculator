@@ -86,8 +86,8 @@ def result():
 
 
 @app.route('/NUindex')
-def NUindex():
-    return render_template('NUindex.html')
+def home():
+    return render_template('NUindex.html', aggregate=None)
 
 @app.route('/calculate', methods=['POST'])
 def calculate():
@@ -101,19 +101,12 @@ def calculate():
 
         # Calculate the aggregate
         aggregate = (matric_percentage * 0.1) + \
-                (fsc_percentage * 0.4) + \
-                ((nu_test_marks - (wrong_mcqs_except_english * 0.25) - (wrong_mcqs_english * 0.25 * 0.33)) * 0.5)
+                    (fsc_percentage * 0.4) + \
+                    ((nu_test_marks - (wrong_mcqs_except_english * 0.25) - (wrong_mcqs_english * 0.25 * 0.33)) * 0.5)
         
-        
-        # Redirect to the result page with the aggregate value
-        return redirect(url_for('NUresult', aggregate=aggregate))
+        return render_template('NUindex.html', aggregate=aggregate)
     except Exception as e:
         return str(e)
-
-@app.route('/NUresult')
-def NUresult():
-    aggregate = request.args.get('aggregate')
-    return render_template('NUresult.html', aggregate=aggregate)
 
 if __name__ == '__main__':
     app.run(debug=True)
