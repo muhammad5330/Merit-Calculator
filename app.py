@@ -148,7 +148,7 @@ def calculate():
         img.seek(0)
         chart_url = base64.b64encode(img.getvalue()).decode()
 
-        return render_template('index1.html', aggregate=aggregate, chart_url=chart_url)
+        return render_template('NUindex.html', aggregate=aggregate, chart_url=chart_url)
     except Exception as e:
         return str(e)
 
