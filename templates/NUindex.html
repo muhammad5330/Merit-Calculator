@@ -177,6 +177,15 @@
             background-color: #000;
             color: #fff;
         }
+
+        .chart-container {
+            text-align: center;
+        }
+
+        .chart-container img {
+            max-width: 100%;
+            height: auto;
+        }
     </style>
 </head>
 
@@ -277,7 +286,7 @@
         <div class="chart-container">
             <img src="data:image/png;base64,{{ chart_url }}" alt="Aggregate Chart">
         </div>
-        
+
         {% endif %}
 
         <div class="mt-4" style="text-align: center;">
