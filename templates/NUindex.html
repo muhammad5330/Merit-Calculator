@@ -1,15 +1,105 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Aggregate Calculator</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/static/icon.png" type="image/png">
+    <link rel="stylesheet" href="/static/index.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Educatify</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            margin: 0;
-            padding: 0;
+            background: #000;
+            /* color: white; */
+            font-family: 'Poppins', sans-serif;
         }
+
+        .header button {
+            background: #000;
+        }
+
+        .bodybg {
+            background: url('/static/hero-bg.svg') center center;
+
+        }
+
+        /* Ensure the header takes up the full viewport height */
+        .header {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background-size: cover;
+        }
+
+
+        .header .container {
+            z-index: 2;
+        }
+
+
+        .header .container {
+            z-index: 2;
+        }
+
+        .logo-image {
+            width: 10%;
+        }
+
+        .header h1 {
+            font-weight: bold;
+        }
+
+        @media (max-width: 767px) {
+
+            .logo-image {
+                width: 30%;
+            }
+
+            .header h1 {
+                font-size: 300%;
+            }
+
+
+        }
+
+
+        /* <---------------------------- FOOTER CSS ------------------------------->*/
+
+        .footer-section {
+            text-align: center;
+            color: white;
+        }
+
+        .footer-div {
+            margin-top: 5%;
+            width: 100%;
+            font-size: small;
+        }
+
+        .footer-div img {
+            width: 10%;
+            margin-left: 0.5%;
+        }
+
+        /* Css for the icons */
+        .fa {
+            padding: 10px;
+            font-size: 30px;
+            width: 50px;
+            text-align: center;
+            text-decoration: none;
+            margin: 5px 2px;
+        }
+
+        .fa:hover {
+            opacity: 0.7;
+            color: orange;
+            list-style: none;
+        }
+
 
         h1 {
             text-align: center;
@@ -19,10 +109,11 @@
         form {
             max-width: 450px;
             margin: 20px auto;
-            background-color: #fff;
+            background-color: #000;
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+            color: #fff;
         }
 
         label {
@@ -42,6 +133,7 @@
 
         input[type="submit"] {
             background-color: #007bff;
+            border: none;
             color: #fff;
             cursor: pointer;
             transition: background-color 0.3s ease;
@@ -55,11 +147,12 @@
         .result-container {
             max-width: 600px;
             margin: 20px auto;
-            background-color: #fff;
+            background-color: #000;
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
             text-align: center;
+            color: #fff;
         }
 
         .result-container p {
@@ -73,92 +166,179 @@
             margin-top: 30px;
         }
 
-        th, td {
+        th,
+        td {
             padding: 8px;
             text-align: left;
             border-bottom: 1px solid #ddd;
         }
 
         th {
-            background-color: #f2f2f2;
+            background-color: #000;
+            color: #fff;
         }
     </style>
 </head>
+
 <body>
-    <h1>FAST University Aggregate Calculator</h1>
-    <form action="/calculate" method="POST">
-        <label for="matric_percentage">Matric Percentage:</label>
-        <input type="text" id="matric_percentage" name="matric_percentage"><br><br>
+    <section class="bodybg">
 
-        <label for="fsc_percentage">FSC Percentage:</label>
-        <input type="text" id="fsc_percentage" name="fsc_percentage"><br><br>
+        <!-- THE HERO SECTION -->
 
-        <label for="nu_test_marks">NU Test Marks:</label>
-        <input type="text" id="nu_test_marks" name="nu_test_marks"><br><br>
+        <header class="header text-center text-white">
+            <nav class="d-flex justify-content-center align-items-start">
+                <img src="/static/white-logo.png" alt="Logo" class="logo-image">
+            </nav>
+            <div class="container d-flex flex-column align-items-center justify-content-center h-100">
+                <h1 class="display-4 text-left text-md-center mx-5 ml-md-0">Introducing our AI-FAST NUCES Merit
+                    Calculator</h1>
 
-        <label for="wrong_mcqs_except_english">Number of Wrong MCQs (Except English):</label>
-        <input type="text" id="wrong_mcqs_except_english" name="wrong_mcqs_except_english"><br><br>
+                <p id="tagline" class="lead"></p>
 
-        <label for="wrong_mcqs_english">Number of Wrong MCQs (English):</label>
-        <input type="text" id="wrong_mcqs_english" name="wrong_mcqs_english"><br><br>
+                <h5>Scroll down to Calculate your merit.</h5>
+            </div>
+        </header>
 
-        <input type="submit" value="Calculate">
-    </form>
+        <form action="/calculate" method="POST">
+            <h3 style="font-weight: bold; text-align: center; margin: 5% 0%;">Calculate Merit Now!</h3>
+            <label for="matric_percentage">Matric Percentage:</label>
+            <input type="text" id="matric_percentage" name="matric_percentage"><br><br>
 
-    {% if aggregate is not none %}
-    <div class="result-container">
-        <p>Your aggregate is: {{ aggregate }}</p>
-        <table>
-            <thead>
-                <tr>
-                    <th>Programs</th>
-                    <th>Last Year Merit</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>BS Computer Science</td>
-                    <td>73</td>
-                </tr>
-                <tr>
-                    <td>BS Software Engineering</td>
-                    <td>73</td>
-                </tr>
-                <tr>
-                    <td>BS Artificial Intelligence</td>
-                    <td>72</td>
-                </tr>
-                <tr>
-                    <td>BS Electrical Engineering</td>
-                    <td>72</td>
-                </tr>
-                <tr>
-                    <td>BS Cyber Security</td>
-                    <td>68</td>
-                </tr>
-                <tr>
-                    <td>BS Data Science</td>
-                    <td>68</td>
-                </tr>
-                <tr>
-                    <td>BS Financial Technology</td>
-                    <td>61</td>
-                </tr>
-                <tr>
-                    <td>BS Business Administration</td>
-                    <td>59</td>
-                </tr>
-                <tr>
-                    <td>BS Accounting and Finance</td>
-                    <td>58</td>
-                </tr>
-                <tr>
-                    <td>BS Business Analytics</td>
-                    <td>56</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    {% endif %}
+            <label for="fsc_percentage">FSC Percentage:</label>
+            <input type="text" id="fsc_percentage" name="fsc_percentage"><br><br>
+
+            <label for="nu_test_marks">NU Test Marks:</label>
+            <input type="text" id="nu_test_marks" name="nu_test_marks"><br><br>
+
+            <label for="wrong_mcqs_except_english">Number of Wrong MCQs (Except English):</label>
+            <input type="text" id="wrong_mcqs_except_english" name="wrong_mcqs_except_english"><br><br>
+
+            <label for="wrong_mcqs_english">Number of Wrong MCQs (English):</label>
+            <input type="text" id="wrong_mcqs_english" name="wrong_mcqs_english"><br><br>
+
+            <input type="submit" value="Calculate">
+        </form>
+
+        {% if aggregate is not none %}
+        <div class="result-container">
+            <h4 style="font-weight: bold;">Your aggregate is: {{ aggregate }}</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Programs</th>
+                        <th>Last Year Merit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>BS Computer Science</td>
+                        <td>73</td>
+                    </tr>
+                    <tr>
+                        <td>BS Software Engineering</td>
+                        <td>73</td>
+                    </tr>
+                    <tr>
+                        <td>BS Artificial Intelligence</td>
+                        <td>72</td>
+                    </tr>
+                    <tr>
+                        <td>BS Electrical Engineering</td>
+                        <td>72</td>
+                    </tr>
+                    <tr>
+                        <td>BS Cyber Security</td>
+                        <td>68</td>
+                    </tr>
+                    <tr>
+                        <td>BS Data Science</td>
+                        <td>68</td>
+                    </tr>
+                    <tr>
+                        <td>BS Financial Technology</td>
+                        <td>61</td>
+                    </tr>
+                    <tr>
+                        <td>BS Business Administration</td>
+                        <td>59</td>
+                    </tr>
+                    <tr>
+                        <td>BS Accounting and Finance</td>
+                        <td>58</td>
+                    </tr>
+                    <tr>
+                        <td>BS Business Analytics</td>
+                        <td>56</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+
+        <div class="mt-4" style="text-align: center;">
+            <a href="/home"> <button class="btn btn-primary mb-3" style="background-color: #000;">Back to Home</button></a><br>
+        </div>
+
+        <!-- Footer -->
+        <section class="footer-section">
+            <div class="footer-div">
+                <p>Copyright &copy;2024. All rights Reserved.</p>
+                <p> Designed by </p><img src="/static/white-logo.png" />
+            </div>
+        </section>
+
+    </section>
+
+    <script>
+        // Array of words to cycle through
+        const words = [
+            "Inspire",
+            "Navigate",
+            "Unleash",
+            "Craft",
+            "Learn",
+            "Empower",
+            "Transform",
+            "Achieve",
+            "Explore"
+        ];
+
+        const baseText = "With Educatify ";
+        let wordIndex = 0;
+        let charIndex = 0;
+        const typingSpeed = 100; // Speed in milliseconds
+        const erasingSpeed = 50; // Speed in milliseconds
+        const delayBetweenWords = 2000; // Delay between words in milliseconds
+        const taglineElement = document.getElementById('tagline');
+
+        function type() {
+            if (charIndex < words[wordIndex].length) {
+                taglineElement.textContent = baseText + words[wordIndex].substring(0, charIndex + 1);
+                charIndex++;
+                setTimeout(type, typingSpeed);
+            } else {
+                setTimeout(erase, delayBetweenWords);
+            }
+        }
+
+        function erase() {
+            if (charIndex > 0) {
+                taglineElement.textContent = baseText + words[wordIndex].substring(0, charIndex - 1);
+                charIndex--;
+                setTimeout(erase, erasingSpeed);
+            } else {
+                wordIndex = (wordIndex + 1) % words.length;
+                setTimeout(type, typingSpeed);
+            }
+        }
+
+        // Initial call to start the typing animation
+        document.addEventListener('DOMContentLoaded', (event) => {
+            setTimeout(type, typingSpeed);
+        });
+
+    </script>
+
 </body>
+
 </html>
