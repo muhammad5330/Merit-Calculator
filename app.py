@@ -2,6 +2,9 @@ from flask import Flask, render_template, request
 import pandas as pd
 import plotly.graph_objs as go
 import plotly.express as px
+import matplotlib.pyplot as plt
+import io
+import base64
 
 app = Flask(__name__)
 
@@ -108,7 +111,44 @@ def calculate():
                     (fsc_percentage * 0.4) + \
                     ((nu_test_marks - (wrong_mcqs_except_english * 0.25) - (wrong_mcqs_english * 0.25 * 0.33)) * 0.5)
         
-        return render_template('NUindex.html', aggregate=aggregate)
+        # Create the bar chart
+        program_aggregates = {
+            'BS Computer Science': 73,
+            'BS Software Engineering': 73,
+            'BS Artificial Intelligence': 72,
+            'BS Electrical Engineering': 72,
+            'BS Cyber Security': 68,
+            'BS Data Science': 68,
+            'BS Financial Technology': 61,
+            'BS Business Administration': 59,
+            'BS Accounting and Finance': 58,
+            'BS Business Analytics': 56
+        }
+
+        programs = list(program_aggregates.keys())
+        aggregates = list(program_aggregates.values())
+
+        plt.figure(figsize=(12, 8))
+        bars = plt.bar(programs, aggregates, label='Program Merit', alpha=0.7, color='skyblue')
+        plt.axhline(y=aggregate, color='r', linestyle='--', linewidth=2, label=f'Your Aggregate: {aggregate:.2f}')
+        plt.xticks(rotation=45, ha='right', fontsize=10)
+        plt.ylabel('Aggregate Percentage', fontsize=12)
+        plt.title('Comparison of Your Aggregate with Program Merits', fontsize=14)
+        plt.legend()
+        plt.grid(axis='y', linestyle='--', linewidth=0.7, alpha=0.7)
+
+        # Add values on top of the bars
+        for bar in bars:
+            yval = bar.get_height()
+            plt.text(bar.get_x() + bar.get_width()/2, yval, round(yval, 2), va='bottom', ha='center', fontsize=10, color='black')
+
+        img = io.BytesIO()
+        plt.tight_layout()
+        plt.savefig(img, format='png')
+        img.seek(0)
+        chart_url = base64.b64encode(img.getvalue()).decode()
+
+        return render_template('index1.html', aggregate=aggregate, chart_url=chart_url)
     except Exception as e:
         return str(e)
 
